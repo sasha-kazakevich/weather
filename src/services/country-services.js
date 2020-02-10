@@ -1,9 +1,10 @@
-export default class CountryServices {
-  _apiUrl = 'http://country.io/names.json';
+import getServices from './services-helper';
 
-  getCountry = async () => {
-    const res = await fetch(`https://cors-anywhere.herokuapp.com/${this._apiUrl}`);
+const CountryServices = () => {
+  const _apiUrl = 'http://country.io/names.json'
+  const _url = `https://cors-anywhere.herokuapp.com/${_apiUrl}`;
 
-    return await res.json();
-  }
+  return getServices(_url);
 }
+
+export default CountryServices;

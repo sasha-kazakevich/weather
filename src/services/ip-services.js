@@ -1,14 +1,12 @@
-export default class IpServices {
-  _apiUrl = 'http://ipinfo.io';
-  _token = 'd36c7e139f7f91';
+import getServices from './services-helper'
 
-  getIp = async () => {
-    const res = await fetch(`https://cors-anywhere.herokuapp.com/${this._apiUrl}/json?token=${this._token}`)
+let ipServices = () => {
+  const _apiUrl = 'http://ipinfo.io'
+  const _token = 'd36c7e139f7f91'
 
-    if (!res.ok) {
-      throw new Error(`Error ${res.status}`)
-    }
+  const _url = `https://cors-anywhere.herokuapp.com/${_apiUrl}/json?token=${_token}`
 
-    return await res.json();
-  }
+  return getServices(_url)
 }
+
+export default ipServices

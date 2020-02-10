@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 
 export default class Weather extends Component {
 
@@ -9,30 +9,30 @@ export default class Weather extends Component {
   }
 
   componentDidMount() {
-    const { getIp, getCountry } = this.props;
+    const { getIp, getCountry } = this.props
 
     getIp()
-    .then((data) => {
-      this.setState({city: data.city})
-      return data.country
+      .then((data) => {
+        this.setState({city: data.city})
+        return data.country
+        })
+      .then(async (countryCode) => {
+        let country = await getCountry()
+        this.setState({country: country[countryCode]})
       })
-    .then(countryCode => {
-      getCountry().then(listCountry => 
-      this.setState({country: listCountry[countryCode]}))
-    })
 
-    setInterval(this.formatDate.bind(this), 1000);
+    setInterval(this.formatDate, 1000)
   }
 
-  formatDate() {
-    const options = {weekday: 'short', day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: false};
-    const date = new Date();
+  formatDate = () => {
+    const options = {weekday: 'short', day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: false}
+    const date = new Date()
     
     this.setState({date: date.toLocaleString('en-US',options)})
   }
 
   render() {
-    const {city,country,date} = this.state;
+    const {city,country,date} = this.state
 
     return(
       <div className="today">
